@@ -125,3 +125,4 @@ Loyiha sof HTML5, zamonaviy CSS3 va Vanilla JavaScript asosida yaratilgan. Uni i
 
 1. Papkadagi [index.html](file:///c:/Users/user/Desktop/New%20folder%20(3)/index.html) faylini sichqoncha bilan ikki marta bosing.
 2. Sahifa sizning sevimli brauzeringizda (Google Chrome, Microsoft Edge, Mozilla Firefox va h.k.) ochiladi va to‘liq ishga tushadi!
+# kino
