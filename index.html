@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineMax — Online Kino Platformasi | 4K Filmlar va Seriallar</title>
+  <meta name="description" content="CineMax — eng so'nggi va mashhur filmlar, seriallar va multfilmlarni yuqori sifatda (4K / HD) o'zbek tilida tomosha qilish uchun premium kino platformasi.">
+  <meta name="keywords" content="cinemax, online kino, kinolar, seriallar, o'zbekcha tarjima kinolar, 4k kinolar">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎬</text></svg>">
+
+  <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Navigation Header
+       ========================================================================== -->
+  <header class="main-header" id="mainHeader">
+    <div class="container nav-container">
+      
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="brandLogo">
+        <div class="logo-badge">
+          <i class="fas fa-play"></i>
+        </div>
+        <span class="logo-text">Cine<span>Max</span></span>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link active" data-view="home">Bosh sahifa</a></li>
+          <li><a href="#" class="nav-link" data-view="catalog">Barcha kinolar</a></li>
+          <li><a href="#" class="nav-link" data-view="genres">Janrlar</a></li>
+          <li><a href="#" class="nav-link" data-view="series">Seriallar</a></li>
+          <li>
+            <a href="#" class="nav-link" data-view="favorites" style="display:flex; align-items:center; gap:6px;">
+              Sevimlilar
+              <span class="badge-count" id="navFavBadge" style="position:static;">0</span>
+            </a>
+          </li>
+          <li><a href="#" class="nav-link" data-view="about">Biz haqimizda</a></li>
+        </ul>
+      </nav>
+
+      <!-- Right Actions Bar -->
+      <div class="nav-actions">
+        <!-- Live Instant Search Input -->
+        <div class="search-wrapper">
+          <input 
+            type="text" 
+            id="globalSearchInput" 
+            class="search-input-box" 
+            placeholder="Kino, janr, yil qidirish..." 
+            autocomplete="off"
+          >
+          <i class="fas fa-search search-btn-icon"></i>
+        </div>
+
+        <!-- Surprise / Random Movie Picker -->
+        <button class="surprise-btn" id="navSurpriseBtn" title="Tasodifiy kino tanlash">
+          <i class="fas fa-dice"></i>
+          <span>Nima ko'ramiz?</span>
+        </button>
+
+        <!-- User Profile Dropdown Button -->
+        <button class="user-profile-btn" id="userProfileBtn" title="Foydalanuvchi profili">
+          <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80" alt="Profil" class="profile-avatar">
+          <i class="fas fa-crown" style="color:var(--gold); font-size:0.8rem; margin-right:4px;"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Hero Banner Showcase
+       ========================================================================== -->
+  <section class="hero-section" id="heroSection">
+    <div class="hero-backdrop-container">
+      <img src="" alt="Hero film poster" class="hero-backdrop-image" id="heroBackdropImg">
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="container" style="position:relative; z-index:2; width:100%;">
+      <div class="hero-content">
+        <div class="hero-tag-badge">
+          <i class="fas fa-fire"></i>
+          <span>Haftaning Eng Zo'r Filmi</span>
+        </div>
+
+        <h1 class="hero-title" id="heroMovieTitle">Film Nomi</h1>
+
+        <div class="hero-meta">
+          <span class="rating-pill" id="heroMovieRating"><i class="fas fa-star"></i> 8.6</span>
+          <span class="age-pill" id="heroMovieAge">16+</span>
+          <span class="quality-pill" id="heroMovieQuality">4K Ultra HD</span>
+          <span style="display:flex; align-items:center; gap:6px;"><i class="far fa-clock"></i> <span id="heroMovieDuration">2 soat 46 daqiqa</span></span>
+          <span style="color:var(--primary); font-weight:600;" id="heroMovieGenres">Fantastika, Sarguzasht</span>
+        </div>
+
+        <p class="hero-description" id="heroMovieDesc">
+          Film haqida qisqacha ma'lumot shu yerda aks etadi. Pol Atreydes Chani va Frimenlar bilan ittifoq tuzib, uning oilasini yo'q qilgan fitnachilardan qasos olish yo'liga tushadi.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn-primary" id="heroDetailsBtn">
+            <i class="fas fa-play"></i>
+            <span>Film haqida</span>
+          </button>
+          <button class="btn-secondary" id="heroFavBtn">
+            <i class="fas fa-plus"></i>
+            <span>Sevimlilarga qo'shish</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Carousel Pagination Dots -->
+    <div class="hero-pagination" id="heroDots"></div>
+  </section>
+
+  <!-- ==========================================================================
+       Interactive Genre Bar (Sticky Quick Filter)
+       ========================================================================== -->
+  <div class="genre-filter-wrapper">
+    <div class="container">
+      <div class="genres-scroll-container" id="genresScrollBar">
+        <!-- Rendered by JavaScript: Jangari, Komediya, Fantastika, etc. -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MAIN CONTENT CONTAINER
+       ========================================================================== -->
+  <main>
+
+    <!-- SECTION: HOME VIEW -->
+    <div id="homeSections">
+      
+      <!-- 1. Trending Movies Slider -->
+      <section class="section">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <span class="section-subtitle">Top Tanlov</span>
+              <h2 class="section-title">🔥 Hozir Trenddagi Kinolar</h2>
+            </div>
+            <button class="btn-secondary" style="padding:8px 18px; font-size:0.85rem;" onclick="window.CineMax.switchView('catalog')">
+              Hammasini ko'rish <i class="fas fa-arrow-right" style="font-size:0.75rem;"></i>
+            </button>
+          </div>
+
+          <div class="slider-container-row">
+            <button class="slider-nav-btn slider-nav-prev" aria-label="Oldingi"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-track" id="trendingTrack">
+              <!-- Rendered by JS -->
+            </div>
+            <button class="slider-nav-btn slider-nav-next" aria-label="Keyingi"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. High Rated Movies Slider -->
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <span class="section-subtitle">Reytinglar Bo'yicha</span>
+              <h2 class="section-title">⭐ Yuqori IMDb Reytingli Durdonalar</h2>
+            </div>
+          </div>
+
+          <div class="slider-container-row">
+            <button class="slider-nav-btn slider-nav-prev" aria-label="Oldingi"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-track" id="topRatedTrack">
+              <!-- Rendered by JS -->
+            </div>
+            <button class="slider-nav-btn slider-nav-next" aria-label="Keyingi"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. TV Series Section -->
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <span class="section-subtitle">Ko'p Qismli Filmlar</span>
+              <h2 class="section-title">📺 Mashhur Seriallar</h2>
+            </div>
+            <button class="btn-secondary" style="padding:8px 18px; font-size:0.85rem;" onclick="window.CineMax.switchView('series')">
+              Barcha seriallar <i class="fas fa-arrow-right" style="font-size:0.75rem;"></i>
+            </button>
+          </div>
+
+          <div class="slider-container-row">
+            <button class="slider-nav-btn slider-nav-prev" aria-label="Oldingi"><i class="fas fa-chevron-left"></i></button>
+            <div class="slider-track" id="seriesHomeTrack">
+              <!-- Rendered by JS -->
+            </div>
+            <button class="slider-nav-btn slider-nav-next" aria-label="Keyingi"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Recommended Grid -->
+      <section class="section" style="padding-top:0;">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-title-group">
+              <span class="section-subtitle">Sizga Tavsiya Qilamiz</span>
+              <h2 class="section-title">🎬 Eng Sara Kinolar Ro'yxati</h2>
+            </div>
+          </div>
+
+          <div class="movies-grid" id="homeRecomGrid">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SECTION: CATALOG VIEW (Barcha kinolar) -->
+    <div id="catalogSection" style="display:none;" class="section">
+      <div class="container">
+        
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-subtitle">To'liq Katalog</span>
+            <h2 class="section-title">🎬 Kinolar va Seriallar Katalogi</h2>
+          </div>
+
+          <!-- Filter Toolbar -->
+          <div class="filter-toolbar">
+            <select class="filter-select" id="catalogGenreSelect">
+              <option value="all">Barcha Janrlar</option>
+              <option value="Jangari">Jangari</option>
+              <option value="Komediya">Komediya</option>
+              <option value="Fantastika">Fantastika</option>
+              <option value="Sarguzasht">Sarguzasht</option>
+              <option value="Drama">Drama</option>
+              <option value="Dahshat">Dahshat</option>
+              <option value="Multfilm">Multfilm</option>
+              <option value="Detektiv">Detektiv</option>
+              <option value="Romantik">Romantik</option>
+            </select>
+
+            <select class="filter-select" id="catalogTypeSelect">
+              <option value="all">Barcha formatlar</option>
+              <option value="movie">Faqat Kinolar</option>
+              <option value="series">Faqat Seriallar</option>
+            </select>
+
+            <select class="filter-select" id="catalogSortSelect">
+              <option value="popular">Ommabopligi bo'yicha</option>
+              <option value="rating">Yuqori IMDb reytingi</option>
+              <option value="year">Eng yangi yillari</option>
+              <option value="title">Nomi bo'yicha (A-Z)</option>
+            </select>
+
+            <span id="catalogResultCount" style="color:var(--text-muted); font-size:0.85rem; font-weight:600;">24 ta film</span>
+          </div>
+        </div>
+
+        <!-- Catalog Movies Grid -->
+        <div class="movies-grid" id="catalogMoviesGrid">
+          <!-- Rendered by JS -->
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SECTION: GENRES EXPLORER VIEW (Janrlar) -->
+    <div id="genresSection" style="display:none;" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-subtitle">Kino Olami</span>
+            <h2 class="section-title">🗂️ Janrlar Bo'yicha Qidiruv</h2>
+          </div>
+          <p style="color:var(--text-secondary); max-width:500px;">
+            O'zingizga ma'qul bo'lgan janrni tanlang va qiziqarli filmlardan bahramand bo'ling.
+          </p>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:20px;" id="genresGridCards">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: SERIES VIEW (Seriallar) -->
+    <div id="seriesSection" style="display:none;" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-subtitle">Fasllar va Epizodlar</span>
+            <h2 class="section-title">📺 Mashhur Ko'p Qismli Seriallar</h2>
+          </div>
+          <p style="color:var(--text-secondary);">
+            Dunyoning eng mashhur va qiziqarli seriallari to'liq qismlar bilan.
+          </p>
+        </div>
+
+        <div class="movies-grid" id="seriesMoviesGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: FAVORITES VIEW (Sevimlilar) -->
+    <div id="favoritesSection" style="display:none;" class="section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-subtitle">Sizning Shaxsiy Kolleksiyangiz</span>
+            <h2 class="section-title">❤️ Saqlangan Sevimli Kinolar</h2>
+          </div>
+        </div>
+
+        <!-- Empty State for Favorites -->
+        <div class="empty-state" id="favoritesEmptyState" style="display:none;">
+          <i class="far fa-heart empty-state-icon"></i>
+          <h3 class="empty-state-title">Hozircha sevimlilar ro'yxati bo'sh</h3>
+          <p class="empty-state-desc">
+            Sizga yoqqan istalgan kino kartasidagi yurakcha belgisini bosib, uni shaxsiy ro'yxatingizga qo'shib qo'yishingiz mumkin.
+          </p>
+          <button class="btn-primary" onclick="window.CineMax.switchView('catalog')">
+            <i class="fas fa-compass"></i> Kinolar tanlash
+          </button>
+        </div>
+
+        <div class="movies-grid" id="favoritesMoviesGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: ABOUT US VIEW (Biz haqimizda) -->
+    <div id="aboutSection" style="display:none;" class="section">
+      <div class="container">
+        <div class="about-hero-card">
+          <span class="section-subtitle">CineMax Platformasi</span>
+          <h2 style="font-size:2.5rem; font-weight:800; margin:10px 0 16px;">Kino San'atining Yangi Cho'qqisi</h2>
+          <p style="color:#d1d5db; font-size:1.1rem; max-width:700px; line-height:1.7;">
+            CineMax — bu O'zbekistondagi eng ilg'or, qulay va zamonaviy online kinoteatr platformasidir. Biz kino ixlosmandlari uchun jahon kinematografiyasining eng sara asarlarini 4K Ultra HD formatida, professional ovoz va o'zbekcha tarjimada taqdim etamiz.
+          </p>
+        </div>
+
+        <div class="about-features-grid">
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-tv"></i></div>
+            <h3 style="font-size:1.2rem; font-weight:700; color:#fff;">4K Ultra HD & Dolby Atmos</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem;">
+              Kristalldek tiniq tasvir va har bir harakatni his qilishingizni ta'minlaydigan ko'p kanalli immersiv ovoz sifati.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-language"></i></div>
+            <h3 style="font-size:1.2rem; font-weight:700; color:#fff;">Professional Dublyaj</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem;">
+              Barcha filmlar va seriallar mohir o'zbek dublyaj ustalari tomonidan sifatli tarjima qilingan.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3 style="font-size:1.2rem; font-weight:700; color:#fff;">Barcha Qurilmalarda</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem;">
+              Smart TV, kompyuter, planshet yoki smartfoningizda — istalgan joyda to'xtovsiz tomosha qiling.
+            </p>
+          </div>
+
+          <div class="feature-box">
+            <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+            <h3 style="font-size:1.2rem; font-weight:700; color:#fff;">Tezkor va Reklamasiz</h3>
+            <p style="color:var(--text-secondary); font-size:0.95rem;">
+              Ortiqcha reklamalarsiz, tezkor serverlar orqali uzluksiz va yuqori tezlikdagi oqim.
+            </p>
+          </div>
+        </div>
+
+        <!-- FAQ Accordion -->
+        <div style="margin-top:60px;">
+          <h3 class="section-title" style="margin-bottom:24px;">Ko'p beriladigan savollar (FAQ)</h3>
+          <div style="display:flex; flex-direction:column; gap:16px;">
+            <div style="background:var(--bg-card); padding:20px; border-radius:12px; border:1px solid var(--border-light);">
+              <h4 style="font-size:1.1rem; color:#fff; margin-bottom:8px;"><i class="fas fa-question-circle" style="color:var(--primary); margin-right:8px;"></i> CineMax'da filmlarni tomosha qilish bepulmi?</h4>
+              <p style="color:var(--text-secondary); font-size:0.95rem;">Ha! Bizning platformada aksariyat kinolar va seriallarni bepul va yuqori sifatda tomosha qilish imkoniyati mavjud.</p>
+            </div>
+            <div style="background:var(--bg-card); padding:20px; border-radius:12px; border:1px solid var(--border-light);">
+              <h4 style="font-size:1.1rem; color:#fff; margin-bottom:8px;"><i class="fas fa-question-circle" style="color:var(--primary); margin-right:8px;"></i> Filmlarni qanday qilib sevimlilar ro'yxatiga saqlash mumkin?</h4>
+              <p style="color:var(--text-secondary); font-size:0.95rem;">Har bir kino kartasidagi yoki film tafsilotidagi yurakcha tugmasini bosing. Ro'yxat qurilmangiz xotirasida avtomatik saqlanib boradi.</p>
+            </div>
+            <div style="background:var(--bg-card); padding:20px; border-radius:12px; border:1px solid var(--border-light);">
+              <h4 style="font-size:1.1rem; color:#fff; margin-bottom:8px;"><i class="fas fa-question-circle" style="color:var(--primary); margin-right:8px;"></i> Yangi kinolar qanchalik tez-tez qo'shiladi?</h4>
+              <p style="color:var(--text-secondary); font-size:0.95rem;">Katalogimiz har kuni jahon premyeralari va o'zbekcha professional dublyaj qilingan yangi filmlar bilan yangilanadi.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ==========================================================================
+       DETAILED MOVIE MODAL (Kino haqida batafsil sahifa)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="movieDetailModal">
+    <div class="modal-container">
+      
+      <!-- Modal Close Button -->
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Yopish">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <!-- Modal Hero Cover Header -->
+      <div class="modal-hero-cover">
+        <img src="" alt="" class="modal-cover-img" id="modalCoverImg">
+        <div class="modal-cover-gradient"></div>
+        
+        <div class="modal-header-actions">
+          <img src="" alt="" class="modal-poster-thumb" id="modalPosterThumb">
+          <div class="modal-title-wrap">
+            <h2 class="modal-movie-title" id="modalMovieTitle">Film Sarlavhasi</h2>
+            <div class="modal-original-title" id="modalOrigTitle">Original Title</div>
+            <div class="modal-tags-row" id="modalTagsRow">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Content Body -->
+      <div class="modal-body-content">
+        
+        <!-- Action Buttons Bar -->
+        <div class="modal-action-bar">
+          <button class="btn-primary" id="modalWatchNowBtn">
+            <i class="fas fa-play"></i> Filmni tomosha qilish
+          </button>
+          <button class="btn-secondary" id="modalFavToggleBtn">
+            <i class="far fa-heart"></i> Sevimlilarga qo'shish
+          </button>
+          <button class="btn-secondary" id="modalShareBtn" title="Ulashish">
+            <i class="fas fa-share-alt"></i> Ulashish
+          </button>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="modal-nav-tabs">
+          <button class="tab-btn active" data-tab="overviewTab">
+            <i class="fas fa-align-left"></i> Film haqida
+          </button>
+          <button class="tab-btn" data-tab="playerTab">
+            <i class="fas fa-film"></i> Treyler & Video Player
+          </button>
+          <button class="tab-btn" data-tab="actorsTab">
+            <i class="fas fa-users"></i> Ijodkorlar va Aktyorlar
+          </button>
+          <button class="tab-btn" data-tab="reviewsTab">
+            <i class="fas fa-comments"></i> Sharhlar va Baholar
+          </button>
+        </div>
+
+        <!-- TAB 1: OVERVIEW -->
+        <div class="tab-pane active" id="overviewTab">
+          <div class="modal-info-grid">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700; color:#fff; margin-bottom:12px;">Syujet qisqacha tavsifi</h3>
+              <p class="modal-synopsis" id="modalSynopsis"></p>
+
+              <h4 style="font-size:1rem; font-weight:700; color:#fff; margin-bottom:8px;">Bosh rollarda:</h4>
+              <div class="cast-chips" id="modalCastContainer"></div>
+            </div>
+
+            <div class="meta-details-list">
+              <div class="meta-item">
+                <span class="meta-item-label">Rejissyor:</span>
+                <span class="meta-item-value" id="modalDirectorVal">Denis Villeneuve</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Ovoz va Til:</span>
+                <span class="meta-item-value" id="modalAudioVal">O'zbekcha professional dublyaj</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Sifat formati:</span>
+                <span class="meta-item-value">4K Ultra HD / HDR / Dolby Vision</span>
+              </div>
+              <div class="meta-item">
+                <span class="meta-item-label">Kino platformasi:</span>
+                <span class="meta-item-value">CineMax Exclusive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: INTERACTIVE CUSTOM VIDEO PLAYER -->
+        <div class="tab-pane" id="playerTab">
+          <div class="custom-player-wrapper paused" id="customPlayerWrapper">
+            <video class="custom-player-video" id="customPlayerVideo" playsinline preload="metadata">
+              <source src="" type="video/mp4">
+              Brauzeringiz video tegini qo'llab-quvvatlamaydi.
+            </video>
+
+            <!-- Big center play watermark icon -->
+            <div class="big-play-watermark" id="playerBigPlayOverlay">
+              <i class="fas fa-play" style="margin-left:4px;"></i>
+            </div>
+
+            <!-- Custom Video Controls Overlay -->
+            <div class="player-controls-overlay">
+              <div class="player-progress-bar" id="playerProgressBar">
+                <div class="player-progress-filled" id="playerProgressFilled"></div>
+              </div>
+
+              <div class="player-controls-row">
+                <div class="player-left-group">
+                  <button class="player-ctrl-btn" id="playerPlayPauseBtn" title="Play / Pause">
+                    <i class="fas fa-play"></i>
+                  </button>
+                  <button class="player-ctrl-btn" id="playerRewindBtn" title="10 soniya orqaga">
+                    <i class="fas fa-backward"></i>
+                  </button>
+                  <button class="player-ctrl-btn" id="playerForwardBtn" title="10 soniya oldinga">
+                    <i class="fas fa-forward"></i>
+                  </button>
+                  
+                  <div class="volume-slider-box">
+                    <button class="player-ctrl-btn" id="playerMuteBtn" title="Ovoz">
+                      <i class="fas fa-volume-up"></i>
+                    </button>
+                    <input type="range" class="volume-slider" id="playerVolumeSlider" min="0" max="1" step="0.05" value="1">
+                  </div>
+
+                  <span class="player-time-display" id="playerTimeDisplay">00:00 / 00:00</span>
+                </div>
+
+                <div class="player-right-group">
+                  <select class="filter-select" id="playerSpeedSelect" style="padding:4px 8px; font-size:0.75rem;">
+                    <option value="0.75">0.75x</option>
+                    <option value="1" selected>1.0x (Normal)</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="2">2.0x</option>
+                  </select>
+
+                  <span class="quality-pill" style="font-size:0.7rem;">1080p FHD</span>
+
+                  <button class="player-ctrl-btn" id="playerFullScreenBtn" title="To'liq ekran">
+                    <i class="fas fa-expand"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p style="color:var(--text-muted); font-size:0.85rem; text-align:center;">
+            <i class="fas fa-info-circle"></i> Klaviaturadagi <b>Space</b> tugmasi orqali videoni to'xtatish yoki davom ettirish mumkin.
+          </p>
+        </div>
+
+        <!-- TAB 3: ACTORS FULL LIST -->
+        <div class="tab-pane" id="actorsTab">
+          <h3 style="font-size:1.2rem; font-weight:700; color:#fff; margin-bottom:16px;">Ijodiy Jamoa va Bosh Qahramonlar</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:16px;" id="actorsListFull"></div>
+        </div>
+
+        <!-- TAB 4: REVIEWS & COMMENTS -->
+        <div class="tab-pane" id="reviewsTab">
+          <div class="reviews-section">
+            
+            <!-- Submit new review -->
+            <div class="new-review-card">
+              <h4 class="review-form-title">O'z fikr-mulohazangizni qoldiring</h4>
+              
+              <div style="display:flex; align-items:center; gap:16px; margin-bottom:12px; flex-wrap:wrap;">
+                <input 
+                  type="text" 
+                  id="newReviewerName" 
+                  placeholder="Ismingiz (masalan: Azizbek)" 
+                  class="search-input-box" 
+                  style="width:240px; height:38px; border-radius:8px;"
+                >
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:0.85rem; color:var(--text-secondary);">Baholang:</span>
+                  <div class="star-rating-select" id="reviewStarsPicker">
+                    <i class="fas fa-star active" data-val="1"></i>
+                    <i class="fas fa-star active" data-val="2"></i>
+                    <i class="fas fa-star active" data-val="3"></i>
+                    <i class="fas fa-star active" data-val="4"></i>
+                    <i class="fas fa-star active" data-val="5"></i>
+                  </div>
+                </div>
+              </div>
+
+              <textarea 
+                id="newReviewText" 
+                class="review-textarea" 
+                placeholder="Film haqidagi taassurotlaringiz, aktyorlar ijrosi yoki saundtrek haqida yozing..."
+              ></textarea>
+
+              <button class="btn-primary" id="submitReviewBtn" style="padding:10px 22px; font-size:0.9rem;">
+                <i class="fas fa-paper-plane"></i> Sharhni yuborish
+              </button>
+            </div>
+
+            <!-- Existing reviews list -->
+            <div class="reviews-list" id="modalReviewsList"></div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       RANDOM MOVIE PICKER MODAL ("Bugun nima ko'ramiz?")
+       ========================================================================== -->
+  <div class="modal-backdrop" id="randomPickerModal">
+    <div class="modal-container" style="max-width:540px; text-align:center;">
+      <button class="modal-close-btn" id="randomCloseBtn"><i class="fas fa-times"></i></button>
+
+      <div style="padding:40px 24px;">
+        <span class="section-subtitle">Omadingizni Sinang</span>
+        <h2 style="font-size:1.8rem; font-weight:800; margin:8px 0 20px;">🎲 Bugun Nima Ko'ramiz?</h2>
+        
+        <div class="roulette-container" id="rouletteContainer">
+          <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=600&q=80" alt="Roulette" class="roulette-poster" id="roulettePosterImg">
+        </div>
+
+        <div id="rouletteResultBox" style="margin-bottom:24px; display:none;">
+          <h3 id="rouletteMovieTitle" style="font-size:1.4rem; color:var(--primary); font-weight:800; margin-bottom:4px;">Film Nomi</h3>
+          <p id="rouletteMovieMeta" style="color:var(--text-secondary); font-size:0.9rem;">2024 • Fantastika • ★ 8.6</p>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:14px; flex-wrap:wrap;">
+          <button class="btn-primary" id="startSpinBtn">
+            <i class="fas fa-sync-alt"></i> Boshqa kino tanlash
+          </button>
+          <button class="btn-secondary" id="rouletteViewMovieBtn">
+            <i class="fas fa-play"></i> Filmni ko'rish
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       TOAST NOTIFICATION CONTAINER
+       ========================================================================== -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- ==========================================================================
+       Mobile Bottom Navigation Bar (PWA Style)
+       ========================================================================== -->
+  <nav class="mobile-bottom-nav">
+    <a href="#" class="mobile-nav-item active" data-view="home">
+      <i class="fas fa-home"></i>
+      <span>Bosh sahifa</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-view="catalog">
+      <i class="fas fa-film"></i>
+      <span>Katalog</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-view="genres">
+      <i class="fas fa-th-large"></i>
+      <span>Janrlar</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-view="favorites">
+      <i class="fas fa-heart"></i>
+      <span>Sevimlilar</span>
+      <span class="badge-count" id="mobileFavBadge" style="top:-2px; right:8px;">0</span>
+    </a>
+    <a href="#" class="mobile-nav-item" data-view="about">
+      <i class="fas fa-info-circle"></i>
+      <span>Haqida</span>
+    </a>
+  </nav>
+
+  <!-- ==========================================================================
+       Footer
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom:12px;">
+            <div class="logo-badge"><i class="fas fa-play"></i></div>
+            <span class="logo-text">Cine<span>Max</span></span>
+          </a>
+          <p class="footer-brand-p">
+            CineMax — zamonaviy texnologiyalar va yuqori sifatli 4K kinolar platformasi. Eng sara filmlar va seriallar faqat siz uchun.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-btn" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" class="social-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-btn" title="Twitter"><i class="fab fa-twitter"></i></a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Navigatsiya</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link" onclick="window.CineMax.switchView('home')">Bosh sahifa</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.switchView('catalog')">Barcha kinolar</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.switchView('series')">Seriallar to'plami</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.switchView('favorites')">Mening sevimlilarim</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.switchView('about')">Biz haqimizda</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Mashhur Janrlar</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link" onclick="window.CineMax.setGenre('Jangari')">Jangari kinolar</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.setGenre('Komediya')">Komediyalar</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.setGenre('Fantastika')">Fantastika</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.setGenre('Dahshat')">Dahshatli filmlar</a></li>
+            <li><a href="#" class="footer-link" onclick="window.CineMax.setGenre('Multfilm')">Multfilmlar</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Bog'lanish va Yordam</h4>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:12px;">
+            Savollaringiz bormi? Bizning 24/7 qo'llab-quvvatlash xizmatimiz doimo aloqada.
+          </p>
+          <div style="color:#fff; font-weight:600; font-size:0.95rem; margin-bottom:6px;">
+            <i class="fas fa-envelope" style="color:var(--primary); margin-right:8px;"></i> support@cinemax.uz
+          </div>
+          <div style="color:#fff; font-weight:600; font-size:0.95rem;">
+            <i class="fas fa-phone-alt" style="color:var(--primary); margin-right:8px;"></i> +998 (71) 200-00-00
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 CineMax. Barcha huquqlar himoyalangan. Onlayn kinoteatr.</div>
+        <div style="display:flex; gap:20px;">
+          <a href="#" style="color:var(--text-muted); font-size:0.85rem;">Foydalanish shartlari</a>
+          <a href="#" style="color:var(--text-muted); font-size:0.85rem;">Maxfiylik siyosati</a>
+          <a href="#" style="color:var(--text-muted); font-size:0.85rem;">Mualliflik huquqi</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/movies-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
